@@ -29,6 +29,7 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+Rails.root.glob('spec/support/**/*.rb').sort.each { |f| require f }
 I18n.locale = "en"
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -57,6 +58,7 @@ RSpec.configure do |config|
   # https://rspec.info/features/6-0/rspec-rails
   config.infer_spec_type_from_file_location!
 
+  config.include SignInSupport
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
